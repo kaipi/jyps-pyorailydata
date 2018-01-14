@@ -59,7 +59,6 @@ class App extends Component {
     let lines = [];
     this.state.dataFields.map(item => {
       if (item.display === true) {
-        let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
         lines.push(
           <Line
             type="monotone"
