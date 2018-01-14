@@ -8,15 +8,32 @@ class App extends Component {
   constructor() {
     super();
     this.getData = this.getData.bind(this);
+    this.updateGraphs = this.updateGraphs.bind(this);
+    this.updateSwitch = this.updateSwitch.bind(this);
     this.chartData = [];
     this.state = {
       data: [],
       switches: [],
-      lines: []
+      lines: [],
+      dataFields: [
+        { name: "Kinakujan silta", display: true, color: "blue" },
+        { name: "JK-1", display: false, color: "red" },
+        { name: "PP-1", display: false, color: "black" },
+        { name: "Matkakeskus", display: false, color: "green" },
+        { name: "Satama", display: false, color: "orange" },
+        { name: "JK-2", display: false, color: "cadetblue" },
+        { name: "PP-2", display: false, color: "indigo" },
+        { name: "Tourula", display: false, color: "lightslategray" },
+        { name: "JK-3", display: false, color: "mediumspringgreen" },
+        { name: "PP-3", display: false, color: "olivedrab" },
+        { name: "Vaajakoskentie_Jyskä", display: false, color: "sandybrown" }
+      ]
     };
   }
   componentDidMount() {
     this.getData();
+    this.getSwitches();
+    this.updateGraphs();
   }
   getData() {
     fetch("http://api.jyps.fi/api/data/v1/cyclistdata")
@@ -38,8 +55,51 @@ class App extends Component {
         console.warn("rekt :( " + error);
       });
   }
-  updateGraphs() {}
-  getGraph() {}
+  updateGraphs() {
+    let lines = [];
+    this.state.dataFields.map(item => {
+      if (item.display === true) {
+        let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        lines.push(
+          <Line
+            type="monotone"
+            key={item.name}
+            dataKey={item.name}
+            stroke={item.color}
+            dot={false}
+            activeDot={{ r: 0 }}
+          />
+        );
+      }
+    });
+    this.setState({ lines: lines });
+  }
+  getSwitches() {
+    let switches = [];
+    this.state.dataFields.map(field => {
+      switches.push(
+        <Switch
+          checked={field.display}
+          key={field.name}
+          label={field.name}
+          onChange={() => {
+            this.updateSwitch(field.name);
+          }}
+        />
+      );
+    });
+    this.setState({ switches: switches });
+  }
+  updateSwitch(value) {
+    let df = this.state.dataFields;
+    let field = df.find(o => o.name === value);
+    if (field !== undefined) {
+      field.display = !field.display;
+    }
+    this.setState({ dataFields: df });
+    this.updateGraphs();
+    this.getSwitches();
+  }
   render() {
     return (
       <div className="App">
@@ -55,18 +115,20 @@ class App extends Component {
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dataKey="Satama" stroke="#8884d8" dot={false} activeDot={{ r: 0 }} />
-            <Line type="monotone" dataKey="PP-1" stroke="#82ca9d" dot={false} activeDot={{ r: 0 }} />
+            {this.state.lines}
           </LineChart>
         </div>
         <span>{this.state.switches}</span>
-        <span>Jyväskylän kaupungin pyöräilydata - Timo Kaipiainen & Jyps Ry / 2018</span>
         <br />
-        <span>
-          Datalähde: <a href="http://data.jyvaskyla.fi/data.php">Jyväskylän avoin data </a>
-        </span>
-        <br />
-        [<a href="https://www.github.com/kaipi/jyps-pyorailydata">GitHub</a>]
+        <div className="footer">
+          <span>Jyväskylän kaupungin pyöräilydata - Timo Kaipiainen & Jyps Ry / 2018</span>
+          <br />
+          <span>
+            Datalähde: <a href="http://data.jyvaskyla.fi/data.php">Jyväskylän avoin data </a>
+          </span>
+          <br />
+          [<a href="https://www.github.com/kaipi/jyps-pyorailydata">GitHub</a>]
+        </div>
       </div>
     );
   }
