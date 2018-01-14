@@ -48,6 +48,7 @@ class App extends Component {
           } else {
             found[item.location] = item.cyclist_qty;
           }
+          return null;
         });
         this.setState({ data: this.chartData });
       })
@@ -70,6 +71,7 @@ class App extends Component {
           />
         );
       }
+      return null;
     });
     this.setState({ lines: lines });
   }
@@ -86,6 +88,7 @@ class App extends Component {
           }}
         />
       );
+      return null;
     });
     this.setState({ switches: switches });
   }
