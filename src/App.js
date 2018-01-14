@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from "recharts";
-import { Navbar, NavbarGroup, NavbarHeading, Icon } from "@blueprintjs/core";
+import { Navbar, NavbarGroup, NavbarHeading, Switch } from "@blueprintjs/core";
+
 import "./App.css";
 
 class App extends Component {
@@ -9,7 +10,9 @@ class App extends Component {
     this.getData = this.getData.bind(this);
     this.chartData = [];
     this.state = {
-      data: []
+      data: [],
+      switches: [],
+      lines: []
     };
   }
   componentDidMount() {
@@ -56,6 +59,7 @@ class App extends Component {
             <Line type="monotone" dataKey="PP-1" stroke="#82ca9d" dot={false} activeDot={{ r: 0 }} />
           </LineChart>
         </div>
+        <span>{this.state.switches}</span>
         <span>Jyväskylän kaupungin pyöräilydata - Timo Kaipiainen & Jyps Ry / 2018</span>
         <br />
         <span>
