@@ -1,0 +1,27 @@
+@import "~@blueprintjs/core/dist/blueprint.css";
+@import "~normalize.css/normalize.css";
+.App {
+  text-align: center;
+}
+
+.chart-container {
+  margin: auto;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding-top: 30px;
+}
+body {
+  margin: 0;
+}
+#container {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  width: 800px;
+  height: 800px;
+  background-color: #fff;
+}
+.recharts-wrapper {
+  margin: auto;
+}
