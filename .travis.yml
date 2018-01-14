@@ -3,5 +3,6 @@ node_js:
   - '6'
 before_install:
   - yarn global add create-react-app
+  - yarn global add react-scripts
 install:
   - yarn build
