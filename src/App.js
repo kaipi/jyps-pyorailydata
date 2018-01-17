@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from "recharts";
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line, LabelList } from "recharts";
 import { Navbar, NavbarGroup, NavbarHeading, Switch } from "@blueprintjs/core";
 
 import "./App.css";
@@ -16,17 +16,27 @@ class App extends Component {
       switches: [],
       lines: [],
       dataFields: [
-        { name: "Kinakujan silta", display: true, color: "blue" },
-        { name: "JK-1", display: false, color: "red" },
-        { name: "PP-1", display: false, color: "black" },
-        { name: "Matkakeskus", display: false, color: "green" },
-        { name: "Satama", display: false, color: "orange" },
-        { name: "JK-2", display: false, color: "cadetblue" },
-        { name: "PP-2", display: false, color: "indigo" },
-        { name: "Tourula", display: false, color: "lightslategray" },
-        { name: "JK-3", display: false, color: "mediumspringgreen" },
-        { name: "PP-3", display: false, color: "olivedrab" },
-        { name: "Vaajakoskentie_Jyskä", display: false, color: "sandybrown" }
+        {
+          name: "Kinakujan silta",
+          displayName: "Kinakujan silta, jalankulkijat yhteensä",
+          display: true,
+          color: "blue"
+        },
+        { name: "JK-1", displayName: "Kinakujan silta, jalankulkijat", display: false, color: "red" },
+        { name: "PP-1", displayName: "Kinakujan silta, polkupyöräilijät", display: false, color: "black" },
+        { name: "Matkakeskus", displayName: "Matkakeskus", display: false, color: "green" },
+        { name: "Satama", displayName: "Satama yhteensä", display: false, color: "orange" },
+        { name: "JK-2", displayName: "Satama, jalankulkijat", display: false, color: "cadetblue" },
+        { name: "PP-2", displayName: "Satama, polkupyöräilijät", display: false, color: "indigo" },
+        { name: "Tourula", displayName: "Tourula yhteensä", display: false, color: "lightslategray" },
+        { name: "JK-3", displayName: "Tourula, jalankulkijat", display: false, color: "mediumspringgreen" },
+        { name: "PP-3", displayName: "Tourula, polkupyöräilijät", display: false, color: "olivedrab" },
+        {
+          name: "Vaajakoskentie_Jyskä",
+          displayName: "Vaajakoskentie, Jyskä",
+          display: false,
+          color: "sandybrown"
+        }
       ]
     };
   }
@@ -60,16 +70,7 @@ class App extends Component {
     let lines = [];
     this.state.dataFields.map(item => {
       if (item.display === true) {
-        lines.push(
-          <Line
-            type="monotone"
-            key={item.name}
-            dataKey={item.name}
-            stroke={item.color}
-            dot={false}
-            activeDot={{ r: 0 }}
-          />
-        );
+        lines.push(<Line type="monotone" dataKey={item.name} stroke={item.color} dot={false} activeDot={{ r: 0 }} />);
       }
       return null;
     });
@@ -79,14 +80,16 @@ class App extends Component {
     let switches = [];
     this.state.dataFields.map(field => {
       switches.push(
-        <Switch
-          checked={field.display}
-          key={field.name}
-          label={field.name}
-          onChange={() => {
-            this.updateSwitch(field.name);
-          }}
-        />
+        <p>
+          <Switch
+            checked={field.display}
+            key={field.name}
+            label={field.displayName}
+            onChange={() => {
+              this.updateSwitch(field.name);
+            }}
+          />
+        </p>
       );
       return null;
     });
