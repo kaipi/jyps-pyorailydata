@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line, LabelList } from "recharts";
+import { LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line } from "recharts";
 import { Navbar, NavbarGroup, NavbarHeading, Switch } from "@blueprintjs/core";
 
 import "./App.css";
@@ -18,19 +18,19 @@ class App extends Component {
       dataFields: [
         {
           name: "Kinakujan silta",
-          displayName: "Kinakujan silta, jalankulkijat yhteensä",
+          displayName: "Yhteensä",
           display: true,
           color: "blue"
         },
-        { name: "JK-1", displayName: "Kinakujan silta, jalankulkijat", display: false, color: "red" },
-        { name: "PP-1", displayName: "Kinakujan silta, polkupyöräilijät", display: false, color: "black" },
+        { name: "JK-1", displayName: "Jalankulkijat", display: false, color: "red" },
+        { name: "PP-1", displayName: "Polkupyöräilijät", display: false, color: "black" },
         { name: "Matkakeskus", displayName: "Matkakeskus", display: false, color: "green" },
-        { name: "Satama", displayName: "Satama yhteensä", display: false, color: "orange" },
-        { name: "JK-2", displayName: "Satama, jalankulkijat", display: false, color: "cadetblue" },
-        { name: "PP-2", displayName: "Satama, polkupyöräilijät", display: false, color: "indigo" },
-        { name: "Tourula", displayName: "Tourula yhteensä", display: false, color: "lightslategray" },
-        { name: "JK-3", displayName: "Tourula, jalankulkijat", display: false, color: "mediumspringgreen" },
-        { name: "PP-3", displayName: "Tourula, polkupyöräilijät", display: false, color: "olivedrab" },
+        { name: "Satama", displayName: "Yhteensä", display: false, color: "orange" },
+        { name: "JK-2", displayName: "Jalankulkijat", display: false, color: "cadetblue" },
+        { name: "PP-2", displayName: "Polkupyöräilijät", display: false, color: "indigo" },
+        { name: "Tourula", displayName: "Yhteensä", display: false, color: "lightslategray" },
+        { name: "JK-3", displayName: "Jalankulkijat", display: false, color: "mediumspringgreen" },
+        { name: "PP-3", displayName: "Polkupyöräilijät", display: false, color: "olivedrab" },
         {
           name: "Vaajakoskentie_Jyskä",
           displayName: "Vaajakoskentie, Jyskä",
