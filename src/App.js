@@ -36,7 +36,7 @@ class App extends Component {
     this.updateGraphs();
   }
   getData() {
-    fetch("http://api.jyps.fi/api/data/v1/cyclistdata")
+    fetch("https://api.jyps.fi/api/data/v1/cyclistdata")
       .then(response => {
         return response.json();
       })
